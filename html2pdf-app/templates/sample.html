@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Faktura VAT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Colors */
+        --color-primary: #000000;
+        --color-background: #ffffff;
+        --color-border: #000000;
+        --color-border-light: #e4e4e7;
+
+        /* Typography */
+        --font-family-base: "Inter", sans-serif;
+        --font-size-xs: 7px;
+        --font-size-sm: 8px;
+        --font-size-base: 10px;
+        --font-size-md: 14px;
+        --font-size-lg: 15px;
+        --font-size-xl: 17px;
+
+        /* Spacing */
+        --spacing-xs: 2px;
+        --spacing-sm: 3px;
+        --spacing-md: 5px;
+        --spacing-lg: 10px;
+        --spacing-xl: 20px;
+        --spacing-2xl: 30px;
+
+        /* Layout */
+        --page-max-width: 595px;
+        --logo-height: 60px;
+
+        /* Borders */
+        --border-width: 1px;
+        --border-style: solid;
+        --border-primary: var(--border-width) var(--border-style)
+          var(--color-border);
+        --border-light: var(--border-width) var(--border-style)
+          var(--color-border-light);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-family-base);
+        background-color: var(--color-background);
+        color: var(--color-primary);
+        max-width: var(--page-max-width);
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: var(--spacing-2xl);
+      }
+
+      .logo {
+        font-size: var(--font-size-md);
+        height: var(--logo-height);
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-2xl);
+        padding: var(--spacing-lg) var(--spacing-2xl);
+      }
+
+      .footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-xl) var(--spacing-2xl);
+        font-size: var(--font-size-xs);
+      }
+
+      .footer-logo {
+        font-size: var(--font-size-base);
+        margin-left: 4px;
+      }
+
+      .info-box {
+        font-size: var(--font-size-sm);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+        flex: 1;
+      }
+
+      .info-box--right {
+        text-align: right;
+      }
+
+      .info-box-items {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+      }
+
+      .invoice-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-md) 0;
+        border-top: var(--border-primary);
+        border-bottom: var(--border-primary);
+      }
+
+      .invoice-title {
+        font-size: var(--font-size-xl);
+      }
+
+      .items-table,
+      .summary-table {
+        width: 100%;
+        padding: 0 var(--spacing-md);
+        font-size: var(--font-size-xs);
+        border-collapse: collapse;
+      }
+
+      .items-table {
+        border-top: var(--border-primary);
+        border-bottom: var(--border-primary);
+      }
+
+      .items-table thead {
+        border-bottom: var(--border-light);
+      }
+
+      .items-table th,
+      .items-table td {
+        padding: var(--spacing-md) 0;
+      }
+
+      .summary-table thead {
+        border-bottom: var(--border-primary);
+      }
+
+      th {
+        text-align: left;
+      }
+
+      th.right,
+      td.right {
+        text-align: right;
+      }
+
+      .payment-summary {
+        display: flex;
+        gap: var(--spacing-lg);
+        align-items: flex-start;
+      }
+
+      .total-section {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding-bottom: var(--spacing-md);
+        border-bottom: var(--border-primary);
+      }
+
+      .total-amount {
+        font-size: var(--font-size-lg);
+        text-align: right;
+      }
+
+      .payment-status {
+        display: flex;
+        justify-content: space-between;
+        font-size: var(--font-size-xs);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">LOGO</div>
+      <div class="info-box info-box--right">
+        <strong>Sprzedawca:</strong>
+        <div class="info-box-items">
+          <span>Dane sprzedającego</span>
+          <span>Ulica sprzedającego</span>
+          <span>Kod pocztowy i miasto sprzedającego</span>
+          <span>NIP sprzedającego</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="invoice-header">
+        <div class="invoice-title">Faktura VAT</div>
+        <div class="info-box info-box--right">
+          <div class="info-box-items">
+            <strong>Numer dokumentu: FS/0/00/0000</strong>
+            <div>Data wystawienia: 0000-00-00</div>
+            <div>Data dostawy / wykonania usługi: 0000-00-00</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Nabywca:</strong>
+        <div class="info-box-items">
+          <span>Dane nabywcy</span>
+          <span>Ulica nabywcy</span>
+          <span>Kod pocztowy i miasto nabywcy</span>
+          <div>NIP nabywcy</div>
+        </div>
+      </div>
+
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Lp.</th>
+            <th>Nazwa towaru / usługi</th>
+            <th>Kod CN / PKWiU</th>
+            <th class="right">Ilość</th>
+            <th class="right">j.m.</th>
+            <th class="right">Cena netto</th>
+            <th class="right">VAT</th>
+            <th class="right">Wartość netto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Nazwa towaru / usługi</td>
+            <td></td>
+            <td class="right">1</td>
+            <td class="right">szt</td>
+            <td class="right">2 700,00</td>
+            <td class="right">23%</td>
+            <td class="right">2 700,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="payment-summary">
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>Forma płatności</th>
+              <th class="right">Termin płatności</th>
+              <th class="right">Kwota do zapłaty</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BLIK</td>
+              <td class="right">0000-00-00</td>
+              <td class="right">3 321,00 PLN</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>VAT</th>
+              <th class="right">Wartość netto</th>
+              <th class="right">Kwota VAT</th>
+              <th class="right">Wartość brutto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>W tym:</td>
+              <td>23%</td>
+              <td class="right">2 700,00</td>
+              <td class="right">621,00</td>
+              <td class="right">3 321,00 PLN</td>
+            </tr>
+            <tr>
+              <td><strong>Suma:</strong></td>
+              <td></td>
+              <td class="right"><strong>2 700,00</strong></td>
+              <td class="right"><strong>621,00</strong></td>
+              <td class="right"><strong>3 321,00 PLN</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="total-section">
+        <div class="total-amount">Razem do zapłaty: 3 321,00 PLN</div>
+        <div class="payment-status">
+          <span>Zapłacono: 3 321,00 PLN</span>
+          <span>Pozostaje do zapłaty: 0,00 PLN</span>
+        </div>
+      </div>
+    </main>
+
+    <div class="footer">
+      <div class="generated-by">
+        Wygenerowane przez platformę <span class="footer-logo">LOGO</span>
+      </div>
+      <div class="page-number">Strona 1/1</div>
+    </div>
+  </body>
+</html>
