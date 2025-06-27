@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -35,6 +35,17 @@ export default function FormPage() {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+
+  // Memoize US states options for performance
+  const usStatesOptions = useMemo(
+    () =>
+      US_STATES.map((state) => (
+        <SelectItem key={state} value={state}>
+          {state}
+        </SelectItem>
+      )),
+    []
+  );
 
   const handleInputChange = (field: string, value: string | File | null) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -216,13 +227,7 @@ export default function FormPage() {
                       >
                         <SelectValue placeholder="Wybierz stan" />
                       </SelectTrigger>
-                      <SelectContent>
-                        {US_STATES.map((state) => (
-                          <SelectItem key={state} value={state}>
-                            {state}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
+                      <SelectContent>{usStatesOptions}</SelectContent>
                     </Select>
                   ) : (
                     <Input
